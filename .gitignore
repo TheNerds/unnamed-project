@@ -34,4 +34,6 @@
 # edschneider
 *~
 mesures*.txt
+ARDroneLib/Soft/Build/targets_versions/*
+Examples/Linux/Build/Release/*
 
