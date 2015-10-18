@@ -42,9 +42,13 @@ GENERIC_BINARIES_SOURCE_ENTRYPOINTS+=			\
    ardrone_testing_tool.c
 
 GENERIC_INCLUDES:=$(addprefix -I,$(GENERIC_INCLUDES))
+# edschneider: Incluído a linha abaixo para adicionar as bibliotecas do OpenCV ao processo de compilação
+GENERIC_INCLUDES+=`pkg-config --cflags opencv`
 
 GENERIC_LIB_PATHS=-L$(GENERIC_TARGET_BINARIES_DIR)
-GENERIC_LIBS=-lpc_ardrone -lrt -lgtk-x11-2.0 -lcairo -lgdk-x11-2.0 -lgobject-2.0 -lm
+# edschneider: Alterado a linha abaixo para 
+#GENERIC_LIBS=-lpc_ardrone -lrt -lgtk-x11-2.0 -lcairo -lgdk-x11-2.0 -lgobject-2.0 -lm
+GENERIC_LIBS=-lpc_ardrone -lrt -lgtk-x11-2.0 -lcairo -lgdk-x11-2.0 -lgobject-2.0 -lm `pkg-config --libs opencv`
 
 
 SDK_FLAGS+="USE_APP=yes"

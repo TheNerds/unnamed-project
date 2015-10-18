@@ -161,7 +161,9 @@ C_RESULT ardrone_tool_init_custom (void)
     in_picture->height = 360; // Drone 1 only : Must be greater that the drone 1 picture size (240)
 
     out_picture->framerate = 20; // Drone 1 only, must be equal to drone target FPS
-    out_picture->format = PIX_FMT_RGB565; // MANDATORY ! Only RGB24, RGB565 are supported
+    /* edschneider: alterado o Codec de RGB565 para RGB24 para compatibilizar com o OpenCV
+    out_picture->format = PIX_FMT_RGB565; // MANDATORY ! Only RGB24, RGB565 are supported*/
+    out_picture->format = PIX_FMT_RGB24;
     out_picture->width = in_picture->width;
     out_picture->height = in_picture->height;
 

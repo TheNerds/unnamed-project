@@ -22,6 +22,10 @@
 #include <cairo.h>
 #include <gtk/gtk.h>
 
+// edschneider: OpenCV headers
+#include <opencv/cv.h>
+#include <opencv/highgui.h>
+
 // Funcs pointer definition
 const vp_api_stage_funcs_t display_stage_funcs = {
     NULL,
@@ -183,6 +187,24 @@ C_RESULT display_stage_open (display_stage_cfg_t *cfg)
     return C_OK;
 }
 
+// edschneider: Função para conversão dos video frames em objetos do OpenCV
+IplImage *ipl_image_from_data(uint8_t* data, int reduced_image, int width, int height)
+{
+  IplImage *currframe;
+  IplImage *dst;
+
+  currframe = cvCreateImage(cvSize(width,height), IPL_DEPTH_8U, 3);
+  dst = cvCreateImage(cvSize(width,height), IPL_DEPTH_8U, 3);
+
+  currframe->imageData = data;
+  cvCvtColor(currframe, dst, CV_BGR2RGB);
+  cvReleaseImage(&currframe);
+
+  return dst;
+}
+
+/* edschneider: alterado a função display_stage_transform para usar o OpenCV ao invez do GTK
+De: 
 C_RESULT display_stage_transform (display_stage_cfg_t *cfg, vp_api_io_data_t *in, vp_api_io_data_t *out)
 {
     // Process only if we are using RGB565
@@ -212,6 +234,51 @@ C_RESULT display_stage_transform (display_stage_cfg_t *cfg, vp_api_io_data_t *in
 
     return C_OK;
 }
+Para: */
+
+C_RESULT display_stage_transform (display_stage_cfg_t *cfg, vp_api_io_data_t *in, vp_api_io_data_t *out)
+{
+    uint32_t width = 0, height = 0;
+    getPicSizeFromBufferSize (in->size, &width, &height);
+
+    IplImage *img = ipl_image_from_data((uint8_t*)in->buffers[0], 1, 640, 360);
+    cvNamedWindow("video", CV_WINDOW_AUTOSIZE);
+    cvShowImage("video", img);
+    cvWaitKey(1);
+    cvReleaseImage(&img);
+
+    /*
+    // We don't need any of the below because OpenCV will be displaying the image, not GTK.
+
+    // Process only if we are using RGB565
+    if (FALSE == cfg->paramsOK)
+    {
+        return C_OK;
+    }
+    // Realloc frameBuffer if needed
+    if (in->size != cfg->fbSize)
+    {
+        cfg->frameBuffer = vp_os_realloc (cfg->frameBuffer, in->size);
+        cfg->fbSize = in->size;
+    }
+
+    // Copy last frame to frameBuffer
+    vp_os_memcpy (cfg->frameBuffer, in->buffers[in->indexBuffer], cfg->fbSize);
+
+    // Ask GTK to redraw the window
+    uint32_t width = 0, height = 0;
+    getPicSizeFromBufferSize (in->size, &width, &height);
+    if (TRUE == gtkRunning)
+    {
+        gtk_widget_queue_draw_area (cfg->widget, 0, 0, width, height);
+    }
+
+    // Tell the pipeline that we don't have any output
+    out->size = 0;
+    */
+
+    return C_OK;
+}
 
 C_RESULT display_stage_close (display_stage_cfg_t *cfg)
 {
@@ -224,3 +291,4 @@ C_RESULT display_stage_close (display_stage_cfg_t *cfg)
 
     return C_OK;
 }
+
