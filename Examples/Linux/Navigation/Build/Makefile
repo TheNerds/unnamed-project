@@ -160,6 +160,10 @@ endif
 SDK_FLAGS+="USE_APP=yes"
 SDK_FLAGS+="APP_ID=ardrone_navigation"
 
+# edschneider: Adicionado biblioteca de reconhecimento facial
+GENERIC_LIBS+=-lfacerec_video
+GENERIC_LIB_PATHS+=-L/home/developer/Workspaces/TheNerds/unnamed-project/Examples/Linux/video_demo/Sources/Video/opencv_facerecognizer
+
 export GENERIC_CFLAGS
 export GENERIC_LIBS
 export GENERIC_LIB_PATHS

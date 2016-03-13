@@ -128,7 +128,7 @@ endif
 
 GENERIC_LIB_PATHS=-L$(GENERIC_TARGET_BINARIES_DIR)
 GENERIC_CFLAGS+=-DLIBUDEV_I_KNOW_THE_API_IS_SUBJECT_TO_CHANGE
-GENERIC_LIBS+=-liw -lpc_ardrone -lgthread-2.0 -lgtk-x11-2.0 -lrt -lxml2 -ludev -lswscale -lSDL
+GENERIC_LIBS+=-liw -lpc_ardrone -lgthread-2.0 -lgtk-x11-2.0 -lrt -lxml2 -ludev -lswscale -lSDL -lm  -lglib-2.0 -lgdk-x11-2.0 -lgdk_pixbuf-2.0 -lpango-1.0 -lgobject-2.0
 
 #ifeq ($(USE_ARDRONE_VISION),yes)
 #   GENERIC_LIBS+=-lpc_vision
@@ -159,6 +159,10 @@ endif
 
 SDK_FLAGS+="USE_APP=yes"
 SDK_FLAGS+="APP_ID=ardrone_navigation"
+
+# edschneider: Adicionado biblioteca de reconhecimento facial
+GENERIC_LIBS+=-lfacerec_video
+GENERIC_LIB_PATHS+=/home/developer/Workspaces/TheNerds/unnamed-project/Examples/Linux/video_demo/Sources/Video/opencv_facerecognizer
 
 export GENERIC_CFLAGS
 export GENERIC_LIBS

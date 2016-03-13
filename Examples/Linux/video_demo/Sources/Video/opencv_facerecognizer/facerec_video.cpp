@@ -15,7 +15,7 @@
  *
  *   See <http://www.opensource.org/licenses/bsd-license>
  */
-
+#ifdef __cplusplus
 #include "/usr/local/include/opencv2/core.hpp"
 #include "/usr/local/include/opencv2/face.hpp"
 #include "/usr/local/include/opencv2/highgui.hpp"
@@ -48,9 +48,9 @@ static void read_csv(const string& filename, vector<Mat>& images, vector<int>& l
     }
 }
 
-int test()
+extern "C" void print_msg()
 {
-	return 1;
+	printf("Teste de chamada de função em C++ a partir do C...\n");
 }
 
 int main(int argc, const char *argv[]) {
@@ -156,4 +156,4 @@ int main(int argc, const char *argv[]) {
     }
     return 0;
 }
-
+#endif

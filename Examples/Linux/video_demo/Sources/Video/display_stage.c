@@ -28,6 +28,7 @@
 
 // edschneider : Facerecognizer
 #include </home/developer/Workspaces/TheNerds/unnamed-project/Examples/Linux/video_demo/Sources/Video/opencv_facerecognizer/facerec_video.hpp>
+void test();
 
 // Funcs pointer definition
 const vp_api_stage_funcs_t display_stage_funcs = {
@@ -279,7 +280,6 @@ C_RESULT display_stage_transform (display_stage_cfg_t *cfg, vp_api_io_data_t *in
     // Tell the pipeline that we don't have any output
     out->size = 0;
     */
-
     return C_OK;
 }
 

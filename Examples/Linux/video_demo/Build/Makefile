@@ -48,7 +48,7 @@ GENERIC_INCLUDES+=`pkg-config --cflags opencv`
 GENERIC_LIB_PATHS=-L$(GENERIC_TARGET_BINARIES_DIR)
 # edschneider: Alterado a linha abaixo para 
 #GENERIC_LIBS=-lpc_ardrone -lrt -lgtk-x11-2.0 -lcairo -lgdk-x11-2.0 -lgobject-2.0 -lm
-GENERIC_LIBS=-lpc_ardrone -lrt -lgtk-x11-2.0 -lcairo -lgdk-x11-2.0 -lgobject-2.0 -lm `pkg-config --libs opencv`
+GENERIC_LIBS=-lpc_ardrone -lrt -lgtk-x11-2.0 -lcairo -lgdk-x11-2.0 -lgobject-2.0 -lm `pkg-config --libs opencv` 
 
 
 SDK_FLAGS+="USE_APP=yes"
@@ -67,6 +67,9 @@ export GENERIC_BINARIES_SOURCE_ENTRYPOINTS
 # Bug fix ...
 export GENERIC_LIBRARY_SOURCE_DIR=$(GENERIC_BINARIES_SOURCE_DIR)
 
+# edschneider
+CPP=g++
+CPPFLAGS=-ggdb `pkg-config --cflags opencv` -o `basename facerec_video.cpp .cpp` facerec_video.cpp `pkg-config --libs opencv`
 
 .PHONY: $(TARGET) build_libs
 
