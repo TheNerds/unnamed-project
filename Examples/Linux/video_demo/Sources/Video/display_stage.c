@@ -26,6 +26,9 @@
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
 
+// edschneider : Facerecognizer
+#include </home/developer/Workspaces/TheNerds/unnamed-project/Examples/Linux/video_demo/Sources/Video/opencv_facerecognizer/facerec_video.hpp>
+
 // Funcs pointer definition
 const vp_api_stage_funcs_t display_stage_funcs = {
     NULL,

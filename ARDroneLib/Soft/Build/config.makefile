@@ -4,7 +4,7 @@
 #########################################################
 
 RELEASE_BUILD        = yes
-QUIET_BUILD          = yes
+QUIET_BUILD          = no
 VPSDK_PARALLEL_BUILD = no
 
 #########################################################
