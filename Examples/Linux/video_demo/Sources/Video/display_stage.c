@@ -27,8 +27,8 @@
 #include <opencv/highgui.h>
 
 // edschneider : Facerecognizer
-#include </home/developer/Workspaces/TheNerds/unnamed-project/Examples/Linux/video_demo/Sources/Video/opencv_facerecognizer/facerec_video.hpp>
-void test();
+extern IplImage* facerecog();
+extern void print_msg();
 
 // Funcs pointer definition
 const vp_api_stage_funcs_t display_stage_funcs = {
@@ -244,8 +244,14 @@ C_RESULT display_stage_transform (display_stage_cfg_t *cfg, vp_api_io_data_t *in
 {
     uint32_t width = 0, height = 0;
     getPicSizeFromBufferSize (in->size, &width, &height);
-
     IplImage *img = ipl_image_from_data((uint8_t*)in->buffers[0], 1, 640, 360);
+    //printf("display 1");
+
+    // edschneider: Neste ponto a imagem vinda da câmera do drone já decodificada e pronta para exibição é desviada e repassada para 
+    // a biblioteca externa de reconhecimento facial que processa a imagem e devolve ela processada de volta que então é exibida.
+    img = facerecog(img);
+    //printf("display 2");
+
     cvNamedWindow("video", CV_WINDOW_AUTOSIZE);
     cvShowImage("video", img);
     cvWaitKey(1);

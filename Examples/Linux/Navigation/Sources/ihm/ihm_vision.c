@@ -51,10 +51,6 @@ extern video_stage_ffmpeg_recorder_config_t ffmpeg_vrc;
 #include <ardrone_tool/Video/video_stage.h>
 #include <ardrone_tool/Video/video_recorder_pipeline.h>
 
-// edschneider : libfacerec_video (-lfacerec_video) => Shared Librarie with functions OpenCV with Face Recognizer and declarations of yours external functions
-// This librarie is linked in compilation
-extern void print_msg();
-
 enum {
   VIDEO_DISPLAYSIZE_FRAME=0,
   STATE_FRAME,
@@ -345,9 +341,6 @@ static void ihm_RecordVideo(GtkWidget *widget, gpointer data) {
 }
 
 static void ihm_TakePicture(GtkWidget *widget, gpointer data) {
-	//edschneider:
-	printf("DEBUG: executou!\n");
-	print_msg();
   ardrone_at_raw_picture();
 }
 
