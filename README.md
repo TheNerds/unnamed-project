@@ -8,5 +8,6 @@ Release Notes:
 ==============
 
 - Add OpenCV headers and libraries described in article by "petkrout" in url: http://petrkout.com/linux/parrot-ardrone-2-0-video-streaming-through-opencv-in-linux
-- Add OpenCV Face Recognition example developed by "Philipp Wagner" and discussed in url: http://docs.opencv.org/2.4/modules/contrib/doc/facerec/tutorial/facerec_video_recognition.html. Adapting this code developed in C++ to the called by C using articles for mixed mode discussed in urls above: http://www.oracle.com/technetwork/articles/servers-storage-dev/mixingcandcpluspluscode-305840.html
-and https://isocpp.org/wiki/faq/mixing-c-and-cpp
+- Add OpenCV Face Recognition example developed by "Philipp Wagner" and discussed in url: http://docs.opencv.org/2.4/modules/contrib/doc/facerec/tutorial/facerec_video_recognition.html. I'm transforming this code in a shared librarie for call external in C using a Article wrote by "Himanshu Arora" url: http://www.thegeekstuff.com/2013/01/mix-c-and-cpp/ . 
+
+
